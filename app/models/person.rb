@@ -51,6 +51,7 @@ class Person < ActiveRecord::Base
   SEARCH_PER_PAGE = 8
   MESSAGES_PER_PAGE = 5
   NUM_RECENT_MESSAGES = 4
+  NUM_RECENT_GUESTS = 4
   NUM_WALL_COMMENTS = 10
   NUM_RECENT = 8
   FEED_SIZE = 10
@@ -377,6 +378,16 @@ class Person < ActiveRecord::Base
     # I tried to do this in SQL for efficiency, but failed miserably.
     # Horrifyingly, MySQL lacks support for the INTERSECT keyword.
     (contacts & other_person.contacts).paginate(options)
+  end
+  
+  def guests
+    PageView.find(:all,
+                  :conditions => ["request_url = ? AND person_id <> ?", "/people/" + to_param, id],        :group => "person_id", :order => "created_at DESC", :include => :person)
+  end
+  
+  def recent_guests
+    PageView.find(:all,
+                  :conditions => ["request_url = ? AND person_id <> ?", "/people/" + to_param, id],        :group => "person_id", :order => "created_at DESC", :include => :person, :limit => NUM_RECENT_GUESTS)
   end
   
   protected

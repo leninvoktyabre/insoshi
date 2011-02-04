@@ -1,0 +1,10 @@
+<%- if @guests.empty? -%>
+  <h2>No recent guests</h2>
+<%- else -%>
+  <h2><%= @person.name %>'s Recent Guests</h2>
+  
+	<ul class="list activity">
+	   <%= render :partial => 'shared/guest',
+	              :collection => @guests %>
+	</ul>
+<%- end -%>

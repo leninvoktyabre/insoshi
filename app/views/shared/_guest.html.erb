@@ -1,0 +1,9 @@
+<li>
+  <p class="activity_detail">
+	<%= image_tag("icons/user_edit.png", :class => "icon") %>
+	<%= %(#{person_link_with_image(guest.person)}) %>
+  </p>
+  <p class="meta published clear">
+    <%= time_ago_in_words(guest.created_at).capitalize %> ago
+  </p>
+</li>

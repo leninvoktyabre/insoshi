@@ -31,6 +31,11 @@
     <div class="clear"></div>
   <% end %>
 
+  <% tabs.create('tGuests', 'Guests') do %>
+    <%= render :partial => 'guests' %>
+    <div class="clear"></div>
+  <% end %>
+
   <%= tabs.render %>
 </div>
 <script type='text/javascript'>

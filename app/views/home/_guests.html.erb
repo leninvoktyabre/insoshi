@@ -1,0 +1,10 @@
+<%- unless current_person.recent_guests.empty? -%>
+  <h2>Guests</h2> 
+	<ul class="list activity">
+	   <%= render :partial => 'shared/guest',
+	              :collection => current_person.recent_guests %>
+		<li class="more">
+		  <%= link_to "All guests &raquo;", "/people/#{current_person.to_param}#tGuests" %>
+		</li>
+	</ul>
+<%- end -%>

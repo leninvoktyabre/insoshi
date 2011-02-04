@@ -14,6 +14,7 @@
   <%- if logged_in? -%>
     <%= render :partial => 'requested_contacts' %>
     <%= render :partial => 'messages_preview' %>
+    <%= render :partial => 'guests' %>
     <%= render :partial => 'shared/contacts_preview',
                :locals => { :person => current_person } %>
   <%- else -%>
