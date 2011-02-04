@@ -1,10 +1,10 @@
 log/*.log
 log/*.out
 log/*.pid
-tmp/**/*
+
 .dotest/
 .dotest/*.
-tmp/.*
+
 tmp/profile*
 .DS_Store
 doc/api
