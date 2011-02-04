@@ -1,0 +1,12 @@
+GEM
+  remote: http://rubygems.org/
+  specs:
+    BlueCloth (1.0.1)
+    chronic (0.3.0)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  BlueCloth (= 1.0.1)
+  chronic (= 0.3.0)
