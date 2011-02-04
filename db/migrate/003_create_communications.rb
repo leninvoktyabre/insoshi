@@ -3,7 +3,7 @@ class CreateCommunications < ActiveRecord::Migration
     create_table :communications do |t|
       t.string   :subject
       t.text     :content
-      t.string   :parent_id
+      t.integer  :parent_id
       t.integer  :sender_id
       t.integer  :recipient_id
       t.datetime :sender_deleted_at
