@@ -2,7 +2,7 @@ require 'openssl'
 
 module Crypto
   
-  def self.create_keys(priv = "rsa_key", pub = "#{priv}.pub", bits = 1024)
+  def self.create_keys(priv = "tmp/rsa_key", pub = "#{priv}.pub", bits = 1024)
     private_key = OpenSSL::PKey::RSA.new(bits)
     File.open(priv, "w+") { |fp| fp << private_key.to_s }
     File.open(pub,  "w+") { |fp| fp << private_key.public_key.to_s }    
