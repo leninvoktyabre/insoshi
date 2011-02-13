@@ -98,6 +98,9 @@ class Person < ActiveRecord::Base
   has_many :events
   has_many :event_attendees
   has_many :attendee_events, :through => :event_attendees, :source => :event
+  
+  has_many :pets
+  has_many :adverts
 
   validates_presence_of     :email, :name
   validates_presence_of     :password,              :if => :password_required?

@@ -33,6 +33,7 @@ class PeopleController < ApplicationController
       @posts = @person.blog.posts.paginate(:page => params[:page])
       @galleries = @person.galleries.paginate(:page => params[:page])
       @guests = @person.guests
+      @pets = @person.pets
       
     end
     respond_to do |format|

@@ -1,0 +1,19 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  type: MyString
+  species: MyString
+  sex: MyString
+  price: 9.99
+  title: MyString
+  description: MyString
+  person: 
+
+two:
+  type: MyString
+  species: MyString
+  sex: MyString
+  price: 9.99
+  title: MyString
+  description: MyString
+  person: 

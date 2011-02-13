@@ -5,6 +5,11 @@
     <div class="clear"></div>
   <% end %>
 
+	<% tabs.create('tPets', 'Pets') do %>
+    <%= render :partial => 'shared/pets' %>
+    <div class="clear"></div>
+  <% end %>
+
   <% tabs.create('tWall', 'Wall') do %>
     <%= render :partial => 'wall' %>
     <div class="clear"></div>

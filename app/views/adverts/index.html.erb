@@ -1,0 +1,16 @@
+<%- column_div :type => :primary do -%>
+  <h2>Advertisements</h2>
+
+	<ol class="list forum full">
+	  <%= render :partial => "advert", :collection => @adverts %>
+	</ol>
+
+	<%- if logged_in? -%>
+		<%= link_to "Add advertisement", new_person_advert_path(current_person) %>
+	<% end %>
+<% end %>
+
+<%- column_div :type => :secondary do -%>
+  <%= render :partial => 'searches/box' %>
+  <%= render :partial => 'shared/minifeed' %>
+<%- end -%>

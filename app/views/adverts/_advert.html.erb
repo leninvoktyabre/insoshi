@@ -1,0 +1,18 @@
+<li class="topic">
+  <a name="advert_<%= advert.id %>"></a>
+  <div class="profile-image">
+    <%= image_link advert.person, :image => :thumbnail %>
+  </div>
+  <div class="topic_body">
+    <%- n = advert.comments.count -%>
+    <%= link_to h(advert.title), 
+                advert_path(advert, :comments => n),
+                :class => "show-follow" %>
+    <span class="meta">(<%= pluralize(n, "post") %>)</span>
+    <p class="meta">
+      Started by <%= person_link advert.person %>
+      <%= time_ago_in_words(advert.created_at) %> ago
+    </p>
+  </div>
+  <div class="clear"></div>
+</li>

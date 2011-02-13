@@ -28,8 +28,11 @@ module ApplicationHelper
       #contacts = menu_element("Contacts",
       #                        person_connections_path(current_person))
       events   = menu_element("Events", events_path)
+      
+      board = menu_element("Board", adverts_path)
+      
       #links = [home, profile, contacts, messages, blog, people, forum]
-      links = [home, profile, messages, people, forum]
+      links = [home, profile, messages, people, forum, board]
       # TODO: put this in once events are ready.
       # links.push(events)
       

@@ -1,0 +1,46 @@
+<%- column_div :type => :primary, :class => "hentry" do -%>
+  <h2 class="entry-title"><%= h @advert.title %></h2>
+
+	<table>
+	  <tr>
+	    <th>Deal</th>
+	    <th>Species</th>
+	    <th>Sex</th>
+	    <th>Price</th>
+	    <th>Description</th>
+	  </tr>
+
+	  <tr>
+	    <td><%= @advert.deal %></td>
+	    <td><%= @advert.species %></td>
+	    <td><%= @advert.sex %></td>
+	    <td><%= @advert.price %></td>
+	    <td><%= @advert.description %></td>
+	  </tr>
+	</table>
+
+  <ul class="list topic full">
+    <%= render :partial => 'advert_comments/comment', :collection => @advert.comments %>
+  </ul>
+
+  <h2>Add Reply</h2>
+
+  <p><%= formatting_note %></p>
+
+  <%= error_messages_for :advert_comments %>
+
+  <%- form_for([@advert, @advert.advert_comments.build]) do |f| -%>
+    <div class="form_row">
+      <%= f.text_area :body, :rows => 10, :cols => 30 %>
+    </div>
+
+    <div class="form_row">
+      <%= f.submit "Submit", :class => "button" %>
+    </div>
+  <% end %>
+
+<%- end -%>
+
+<%- column_div :type => :secondary do -%>
+  <%= render :partial => 'shared/minifeed' %>
+<%- end -%>

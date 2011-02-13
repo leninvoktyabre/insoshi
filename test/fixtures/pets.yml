@@ -1,0 +1,17 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  species: MyString
+  sex: MyString
+  name: MyString
+  age: MyString
+  description: MyString
+  person: 
+
+two:
+  species: MyString
+  sex: MyString
+  name: MyString
+  age: MyString
+  description: MyString
+  person: 

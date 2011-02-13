@@ -18,6 +18,8 @@ ActionController::Routing::Routes.draw do |map|
                                   :requirements => { :method => :get }
   map.resource :session
   map.resource :galleries
+  map.resource :pets
+  map.resources :adverts
   map.resources :messages, :collection => { :sent => :get, :trash => :get },
                            :member => { :reply => :get, :undestroy => :put }
 
@@ -30,6 +32,12 @@ ActionController::Routing::Routes.draw do |map|
      person.resources :galleries
      person.resources :connections
      person.resources :comments
+     person.resources :pets
+     person.resources :adverts
+  end
+  
+  map.resources :adverts do |advert|
+    advert.resources :advert_comments
   end
   
   map.resources :galleries do |gallery|
@@ -95,5 +103,7 @@ ActionController::Routing::Routes.draw do |map|
   # Install the default routes as the lowest priority.
   map.connect ':controller/:action/:id'
   map.connect ':controller/:action/:id.:format'
+  
+  
 
 end

@@ -1,0 +1,29 @@
+<li>
+  <a name="post_<%= comment.id %>"></a>
+  <div class="profile-image">
+    <%= image_link comment.commenter, :image => :thumbnail %>
+    <%= image_tag "icons/comment.png", :class => "icon" %>
+  </div>
+
+
+  <p class="meta">
+  Posted by <span class="author"><%= person_link_with_image comment.commenter %></span> 
+      <abbr class="updated" title="<%= comment.created_at %>"><%= time_ago_in_words(comment.created_at) %> ago</abbr>
+      <%- if current_person?(comment.commenter) or admin? -%>
+        <%= link_to image_tag("icons/note_edit.png", :class => 'actioner'),
+                edit_advert_path,
+         :title => 'Edit' %>
+      <%- end -%>
+      <%- if admin? -%>
+        <%= link_to image_tag("icons/comment_delete.png", :class => 'actioner'),
+                      advert_path,
+                      :confirm => 'Delete comment?',
+                      :method => :delete,
+             :title => 'Delete' %>
+      <%- end -%>
+  </p>
+  <div class="forum">
+    <%= display comment.body %>
+  </div>
+  <div class="clear"></div>
+</li>
