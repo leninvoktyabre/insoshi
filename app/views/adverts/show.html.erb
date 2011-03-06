@@ -5,14 +5,17 @@
 	  <tr>
 	    <th>Deal</th>
 	    <th>Species</th>
+	    <th>Breed</th>
 	    <th>Sex</th>
 	    <th>Price</th>
 	    <th>Description</th>
 	  </tr>
-
+	
+		<% item = 0 %>
 	  <tr>
 	    <td><%= item.title if item = DealType.find_by_id(@advert.deal_id) %></td>
 	    <td><%= item.title if item = SpeciesType.find_by_id(@advert.species_id) %></td>
+	    <td><%= item.title if item = BreedType.find_by_id(@advert.breed_id) %></td>
 	    <td><%= item.title if item = SexType.find_by_id(@advert.sex_id) %></td>
 	    <td><%= @advert.price %></td>
 	    <td><%= @advert.description %></td>
