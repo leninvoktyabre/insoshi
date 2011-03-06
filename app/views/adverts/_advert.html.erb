@@ -8,6 +8,18 @@
     <%= link_to h(advert.title), 
                 advert_path(advert, :comments => n),
                 :class => "show-follow" %>
+
+		<%- if current_person?(advert.person) or admin? -%>
+      <%= link_to image_tag("icons/page_white_edit.png",
+                            :class => 'actioner'),
+                  edit_advert_path(advert) %>
+      <%= link_to image_tag("icons/page_white_delete.png",
+                            :class => 'actioner'),
+                  advert_path(advert),
+                  :method => :delete,
+                  :confirm => "Delete this advertisement?" %>
+    <%- end -%>
+
     <span class="meta">(<%= pluralize(n, "post") %>)</span>
     <p class="meta">
       Started by <%= person_link advert.person %>

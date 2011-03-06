@@ -13,6 +13,17 @@
         <%= f.label :email %>
         <%= f.text_field :email, :maxlength => Person::MAX_EMAIL %>
       </div>
+
+			<!--div class="form_row">
+		    <label for="person_city">City</label>
+				<%= f.collection_select(:city_id, @cities.find_all{|city| city.status == City.status_list['active']}, :id, :title) %>
+				<br />
+				<%= link_to "Not in list", "javascript:;", :onclick => "$('#notinlist').show();" %>
+				<br /><br />
+				<div id="notinlist" class="hide">
+				<label for="notinlist">New city</label>
+				<input type="text" name="person[newcity]" />
+		  </div-->
       
     <h3>Public Description</h3>
       <p class="meta">This is what other users of the system see as your 
@@ -89,3 +100,7 @@
     </div>
   <% end %>
 <%- end -%>
+
+<script>
+	$('.hide').hide();
+</script>

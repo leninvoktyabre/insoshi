@@ -1,0 +1,80 @@
+<% if @filters.size > 0 %>
+
+	<h2>Filter</h2>
+	<div style="width:100px;float:left">
+		
+	City
+	<br />
+	<%= link_to cookies[:city_id] != nil ? "<small>Any</small>" : "<big>Any</big>", '', :onclick => "$.cookie('city_id', null)" %>
+	<br />
+	<% @filters.group_by(&:city_id).each do |item| %>
+		<% if city = City.find_by_id(item[0]) and city.status == City::status_list['active'] %>
+			<% n = @filters.find_all{|advert| advert.city_id == item[0]}.size.to_s %>
+			<%= link_to cookies[:city_id] == item[0].to_s ? 
+				"<big>" + city.title + " (" + n + ")" + "</big>" : "<small>" + city.title + " (" + n + ")" + "</small>", 
+				'', :onclick => "$.cookie('city_id', " + "'#{item[0]}'" + ")" %>
+			<br />
+		<% end %>
+	<% end %>
+	<br />
+
+	Deal
+	<br />
+	<%= link_to cookies[:deal_id] ? "<small>Any</small>" : "<big>Any</big>", '', :onclick => "$.cookie('deal_id', null)" %>
+	<br />
+	<% @filters.group_by(&:deal_id).each do |item| %>
+		<% if deal = DealType.find_by_id(item[0]) and deal.status == DealType::status_list['active'] %>
+			<% n = @filters.find_all{|advert| advert.deal_id == item[0]}.size.to_s %>
+			<%= link_to cookies[:deal_id] == item[0].to_s ? 
+				"<big>" + deal.title + " (" + n + ")" + "</big>" : "<small>" + deal.title + " (" + n + ")" + "</small>", 
+				'', :onclick => "$.cookie('deal_id', " + "'#{item[0]}'" + ")" %>
+			<br />
+		<% end %>
+	<% end %>
+	<br />
+
+	Sex
+	<br />
+	<%= link_to cookies[:sex_id] ? "<small>Any</small>" : "<big>Any</big>", '', :onclick => "$.cookie('sex_id', null)" %>
+	<br />
+	<% @filters.group_by(&:sex_id).each do |item| %>
+		<% if sex = SexType.find_by_id(item[0]) and sex.status == SexType::status_list['active'] %>
+			<% n = @filters.find_all{|advert| advert.sex_id == item[0]}.size.to_s %>
+			<%= link_to cookies[:sex_id] == item[0].to_s ? 
+				"<big>" + sex.title + " (" + n + ")" + "</big>" : "<small>" + sex.title + " (" + n + ")" + "</small>", 
+				'', :onclick => "$.cookie('sex_id', " + "'#{item[0]}'" + ")" %>
+			<br />
+		<% end %>
+	<% end %>
+	<br />
+	</div>
+
+	<div>
+		Breeds
+		<br />
+		<%= link_to (cookies[:species_id] or cookies[:breed_id]) ? "<small>Any</small>" : "<big>Any</big>", '', :onclick => "$.cookie('species_id', null); $.cookie('breed_id', null);" %>
+		<br />
+		<% @filters.group_by(&:species_id).each do |item| %>
+			<% if species = SpeciesType.find_by_id(item[0]) and species.status == SpeciesType::status_list['active'] %>
+				<% n = @filters.find_all{|advert| advert.species_id == item[0]}.size.to_s %>
+				<%= link_to cookies[:species_id] == item[0].to_s ? 
+					"<big>" + species.title + " (" + n + ")" + "</big>" : "<small>" + species.title + " (" + n + ")" + "</small>", 
+					'', :onclick => "$.cookie('species_id', " + "'#{item[0]}'" + "); $.cookie('breed_id', null);" %>
+				<br />
+			
+				<% @filters.group_by(&:breed_id).each do |b| %>
+					<% if breed = BreedType.find_by_id(b[0]) and breed.status == BreedType::status_list['active'] and breed.species_id == item[0] %>
+						<% num = @filters.find_all{|adv| adv.breed_id == b[0]}.size.to_s %>
+						<%= link_to cookies[:breed_id] == b[0].to_s ? 
+							"&nbsp;&nbsp;<big>" + breed.title + " (" + num + ")" + "</big>" : "&nbsp;&nbsp;<small>" + breed.title + " (" + num + ")" + "</small>", 
+							'', :onclick => "$.cookie('breed_id', " + "'#{b[0]}'" + "); $.cookie('species_id', null);" %>
+						<br />
+					<% end %>
+				<% end %>
+			
+			<% end %>
+		<% end %>
+		<br />
+	</div>
+
+<% end %>

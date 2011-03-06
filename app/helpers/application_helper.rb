@@ -22,7 +22,7 @@ module ApplicationHelper
 
     if logged_in? and not admin_view?
       profile  = menu_element("Profile",  person_path(current_person))
-      messages = menu_element("Messages", messages_path)
+      #messages = menu_element("Messages", messages_path)
       #blog     = menu_element("Blog",     blog_path(current_person.blog))
       #photos   = menu_element("Photos",   photos_path)
       #contacts = menu_element("Contacts",
@@ -30,19 +30,22 @@ module ApplicationHelper
       events   = menu_element("Events", events_path)
       
       board = menu_element("Board", adverts_path)
+      catalog = menu_element("Catalog", categories_path)
       
       #links = [home, profile, contacts, messages, blog, people, forum]
-      links = [home, profile, messages, people, forum, board]
+      links = [home, profile, people, forum, board, catalog]
       # TODO: put this in once events are ready.
       # links.push(events)
       
     elsif logged_in? and admin_view?
+      settings = menu_element("Settings", admin_settings_path)
       home =    menu_element("Home", home_path)
       people =  menu_element("People", admin_people_path)
       forums =  menu_element(inflect("Forum", Forum.count),
                              admin_forums_path)
       preferences = menu_element("Prefs", admin_preferences_path)
-      links = [home, people, forums, preferences]
+      #cities = menu_element("Cities", admin_cities_path)
+      links = [settings, home, people, forums, preferences]
     else
       links = [home, people]
     end

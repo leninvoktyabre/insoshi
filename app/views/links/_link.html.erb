@@ -1,0 +1,31 @@
+<li class="topic">
+  <a name="link_<%= link.id %>"></a>
+  <div class="profile-image">
+
+  </div>
+  <div class="topic_body">
+    <%= link_to h(link.title), link.url, :target => "_blank" %>
+
+		<%- if current_person?(link.person) or admin? -%>
+      <%= link_to image_tag("icons/page_white_edit.png",
+                            :class => 'actioner'),
+                  edit_category_link_path(@category, link) %>
+      <%= link_to image_tag("icons/page_white_delete.png",
+                            :class => 'actioner'),
+                  category_link_path(@category, link),
+                  :method => :delete,
+                  :confirm => "Delete this link?" %>
+    <%- end -%>
+
+		<p class="link_description">
+			<%= link.description %>
+		</p>
+
+    <p class="meta">
+      Added by <%= person_link link.person %>
+      <%= time_ago_in_words(link.created_at) %> ago
+    </p>
+		
+  </div>
+  <div class="clear"></div>
+</li>

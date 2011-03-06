@@ -1,6 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resources :categories
-  map.resources :links
+  # map.resources :categories
+  # map.resources :links
   map.resources :events, :member => { :attend => :get, 
                                       :unattend => :get } do |event|
     event.resources :comments
@@ -18,8 +18,14 @@ ActionController::Routing::Routes.draw do |map|
                                   :requirements => { :method => :get }
   map.resource :session
   map.resource :galleries
-  map.resource :pets
+  map.resources :pets
   map.resources :adverts
+  map.resources :categories
+  map.resources :cities
+  map.resources :deal_types
+  map.resources :species_types
+  map.resources :sex_types
+  map.resources :breed_types
   map.resources :messages, :collection => { :sent => :get, :trash => :get },
                            :member => { :reply => :get, :undestroy => :put }
 
@@ -40,11 +46,16 @@ ActionController::Routing::Routes.draw do |map|
     advert.resources :advert_comments
   end
   
+  map.resources :categories do |category|
+    category.resources :links
+  end
+  
   map.resources :galleries do |gallery|
     gallery.resources :photos
   end
   map.namespace :admin do |admin|
     admin.resources :people, :preferences
+    admin.resources :settings, :cities, :deal_types, :species_types, :sex_types, :breed_types
     admin.resources :forums do |forums|
       forums.resources :topics do |topic|
         topic.resources :posts

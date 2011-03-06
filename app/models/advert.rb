@@ -1,8 +1,15 @@
 class Advert < ActiveRecord::Base
   belongs_to :person
-  has_many :advert_comments 
+  belongs_to :category
+  belongs_to :city
+  belongs_to :deal_type
+  belongs_to :species_type
+  belongs_to :sex_type
+  belongs_to :breed_type
   
-  validates_presence_of :deal, :species, :sex, :price, :title, :description, :person_id
+  has_many :advert_comments
+  
+  validates_presence_of :deal_id, :species_id, :sex_id, :price, :title, :description, :person_id, :city_id
   
   def deal_list
     ['sell', 'buy', 'exchange', 'gifts']
@@ -19,5 +26,5 @@ class Advert < ActiveRecord::Base
   def comments
     AdvertComment.find(:all, :conditions => ["advert_id = ?", id], :order => "created_at DESC")
   end
-  
+    
 end

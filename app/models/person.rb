@@ -37,7 +37,7 @@ class Person < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :name,
                   :description, :connection_notifications,
                   :message_notifications, :wall_comment_notifications,
-                  :blog_comment_notifications, :identity_url
+                  :blog_comment_notifications, :identity_url, :city
   # Indexed fields for Sphinx
   is_indexed :fields => [ 'name', 'description', 'deactivated',
                           'email_verified'],
@@ -101,6 +101,9 @@ class Person < ActiveRecord::Base
   
   has_many :pets
   has_many :adverts
+  has_many :links
+  
+  belongs_to :city
 
   validates_presence_of     :email, :name
   validates_presence_of     :password,              :if => :password_required?
@@ -391,6 +394,10 @@ class Person < ActiveRecord::Base
   def recent_guests
     PageView.find(:all,
                   :conditions => ["request_url = ? AND person_id <> ?", "/people/" + to_param, id],        :group => "person_id", :order => "created_at DESC", :include => :person, :limit => NUM_RECENT_GUESTS)
+  end
+  
+  def city_list
+    ['Москва', 'Питер']
   end
   
   protected

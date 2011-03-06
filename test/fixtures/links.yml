@@ -1,13 +1,15 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
-  name: MyString
-  description: MyString
-  category_id: 1
-  person_id: 1
+  url: MyString
+  title: MyString
+  description: MyText
+  category: 
+  person: 
 
 two:
-  name: MyString
-  description: MyString
-  category_id: 1
-  person_id: 1
+  url: MyString
+  title: MyString
+  description: MyText
+  category: 
+  person: 

@@ -1,0 +1,2 @@
+module BreedTypesHelper
+end

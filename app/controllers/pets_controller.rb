@@ -18,7 +18,7 @@ class PetsController < ApplicationController
     respond_to do |format|
       if @pet.save
         flash[:success] = "New pets profile successfully created"
-        format.html { redirect_to pets_url(@pet) }
+        format.html { redirect_to person_url(current_person) }
       else
         format.html { render :action => "new" }
       end

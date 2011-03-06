@@ -1,0 +1,37 @@
+<div id="board" style="display: none;">
+  <% tabs = TabsRenderer.new(self, :id => "boardCol") %>
+
+  <% tabs.create('tCities', 'Cities') do %>
+    <%= render :partial => 'cities/cities' %>
+    <div class="clear"></div>
+  <% end %>
+
+	<% tabs.create('tDeals', 'Deals') do %>
+    <%= render :partial => 'deal_types/deals' %>
+    <div class="clear"></div>
+  <% end %>
+
+	<% tabs.create('tSpecies', 'Species') do %>
+    <%= render :partial => 'species_types/species' %>
+    <div class="clear"></div>
+  <% end %>
+
+	<% tabs.create('tBreeds', 'Breeds') do %>
+    <%= render :partial => 'breed_types/breeds' %>
+    <div class="clear"></div>
+  <% end %>
+
+	<% tabs.create('tSex', 'Sex') do %>
+    <%= render :partial => 'sex_types/sex' %>
+    <div class="clear"></div>
+  <% end %>
+
+  <%= tabs.render %>
+</div>
+<script type='text/javascript'>
+  $(document).ready(function() {
+    // Set up the tabs.
+    $("#boardCol > ul").tabs();
+    $("#board").show();
+  })
+</script>

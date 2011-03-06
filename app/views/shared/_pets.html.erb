@@ -1,6 +1,6 @@
 <h2><%= @person.name %>'s Pets </h2>
 <% if current_person?(@person)%>
-  <%= link_to "Add pet", new_pets_path %>
+  <%= link_to "Add pet", new_pet_path %>
 <% end %>
 
 <ul id="pet_list" class="grid">

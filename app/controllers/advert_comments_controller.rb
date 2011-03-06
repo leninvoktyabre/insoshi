@@ -27,5 +27,35 @@ class AdvertCommentsController < ApplicationController
       end
     end
   end
+  
+  def edit
+    @advert = Advert.find(params[:advert_id])
+    @comment = AdvertComment.find(params[:id])
+  end
+  
+  def update
+    @advert = Advert.find(params[:advert_id])
+    @comment = AdvertComment.find(params[:id])
+
+    respond_to do |format|
+      if @comment.update_attributes(params[:advert_comment])
+        flash[:success] = 'Comment was successfully updated.'
+        format.html { redirect_to advert_url(@advert) }
+      else
+        format.html { render :action => "edit" }
+      end
+    end
+  end
+  
+  def destroy
+    @advert = Advert.find(params[:advert_id])
+    @comment = AdvertComment.find(params[:id])
+    @comment.destroy
+
+    respond_to do |format|
+      flash[:success] = 'Comment was successfully destroyed.'
+      format.html { redirect_to advert_url(@advert) }
+    end
+  end
 
 end

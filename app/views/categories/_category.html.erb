@@ -1,0 +1,28 @@
+<li class="topic">
+  <div class="profile-image">
+
+  </div>
+  <div class="topic_body">
+    <%- n = category.links.count -%>
+    <%= link_to h(category.title), 
+                category_path(category, :links => n),
+                :class => "show-follow" %>
+
+		<%- if admin? -%>
+      <%= link_to image_tag("icons/page_white_edit.png",
+                            :class => 'actioner'),
+                  edit_category_path(category) %>
+      <%= link_to image_tag("icons/page_white_delete.png",
+                            :class => 'actioner'),
+                  category_path(category),
+                  :method => :delete,
+                  :confirm => "Delete this category?" %>
+    <%- end -%>
+
+    <span class="meta">(<%= pluralize(n, "link") %>)</span>
+		<br />
+    <span class="meta"><%= category.description %></span>
+
+  </div>
+  <div class="clear"></div>
+</li>

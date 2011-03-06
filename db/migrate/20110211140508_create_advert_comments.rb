@@ -7,8 +7,9 @@ class CreateAdvertComments < ActiveRecord::Migration
 
       t.timestamps
     end
-    add_index :comments, :commenter_id
+    # add_index :comments, :commenter_id
   end
+  say "Created a table"
 
   def self.down
     drop_table :advert_comments

@@ -11,12 +11,11 @@
       <abbr class="updated" title="<%= comment.created_at %>"><%= time_ago_in_words(comment.created_at) %> ago</abbr>
       <%- if current_person?(comment.commenter) or admin? -%>
         <%= link_to image_tag("icons/note_edit.png", :class => 'actioner'),
-                edit_advert_path,
+                edit_advert_advert_comment_path(comment.advert_id, comment),
          :title => 'Edit' %>
-      <%- end -%>
-      <%- if admin? -%>
+
         <%= link_to image_tag("icons/comment_delete.png", :class => 'actioner'),
-                      advert_path,
+                      advert_advert_comment_path(comment.advert_id, comment),
                       :confirm => 'Delete comment?',
                       :method => :delete,
              :title => 'Delete' %>

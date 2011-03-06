@@ -25,6 +25,17 @@
     <%= f.text_field :name, :maxlength => Person::MAX_NAME %>
   </div>
 
+	<div class="form_row">
+    <label for="person_city">City</label>
+		<%= f.collection_select(:city_id, @cities.find_all{|city| city.status == City.status_list['active']}, :id, :title) %>
+		<br />
+		<%= link_to "Not in list", "javascript:;", :onclick => "$('#notinlist').show();" %>
+		<br /><br />
+		<div id="notinlist" class="hide">
+		<label for="notinlist">New city</label>
+		<input type="text" name="person[newcity]" />
+  </div>
+
   <div class="form_row">
     <label for="person_password">Password</label>
     <%= f.password_field :password, :maxlength => Person::MAX_PASSWORD %>
@@ -41,3 +52,7 @@
   </div>
   <% end %>
 <%- end -%>
+
+<script>
+	$('.hide').hide();
+</script>

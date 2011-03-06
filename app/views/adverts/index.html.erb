@@ -10,7 +10,22 @@
 	<% end %>
 <% end %>
 
+<!--
+<%- column_div :type => :primary do -%>
+  <h2>Categories</h2>
+
+	<ol class="list forum full">
+	  <%= render :partial => "categories/category", :collection => @categories %>
+	</ol>
+
+	<%- if admin? -%>
+		<%= link_to "Add category", new_category_path %>
+	<% end %>
+<% end %>
+-->
+
 <%- column_div :type => :secondary do -%>
-  <%= render :partial => 'searches/box' %>
+  <%= render :partial => 'adverts/filter' %>
+	<%= render :partial => 'searches/box' %>
   <%= render :partial => 'shared/minifeed' %>
 <%- end -%>

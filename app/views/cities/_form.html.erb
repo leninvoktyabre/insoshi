@@ -1,0 +1,16 @@
+<%= error_messages_for :city %>
+
+<% form_for(@city) do |f| %>
+  <div class="field">
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+  </div>
+  <div class="field">
+    <%= f.label :status %>
+    <%= f.select(:status, City::status_list) %>
+  </div>
+	<br>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

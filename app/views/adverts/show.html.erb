@@ -11,9 +11,9 @@
 	  </tr>
 
 	  <tr>
-	    <td><%= @advert.deal %></td>
-	    <td><%= @advert.species %></td>
-	    <td><%= @advert.sex %></td>
+	    <td><%= item.title if item = DealType.find_by_id(@advert.deal_id) %></td>
+	    <td><%= item.title if item = SpeciesType.find_by_id(@advert.species_id) %></td>
+	    <td><%= item.title if item = SexType.find_by_id(@advert.sex_id) %></td>
 	    <td><%= @advert.price %></td>
 	    <td><%= @advert.description %></td>
 	  </tr>
@@ -36,6 +36,7 @@
 
     <div class="form_row">
       <%= f.submit "Submit", :class => "button" %>
+			<%= link_to "Cancel", adverts_path %>
     </div>
   <% end %>
 

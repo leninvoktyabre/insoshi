@@ -1,0 +1,25 @@
+<h2>Listing species</h2>
+
+<table>
+  <tr>
+		<th>id</th>
+    <th>Species</th>
+    <th>Status</th>
+    <th colspan="2">Controls</th>
+  </tr>
+
+<% n = 0%>
+<% @species.each do |spec| %>
+  <tr>
+		<td><%= n += 1 %></td>
+    <td><%= spec.title %></td>
+    <td><%= SpeciesType::status_list.invert[spec.status] %></td>
+    <td><%= link_to 'Edit', edit_admin_species_type_path(spec) %></td>
+    <td><%= link_to 'Destroy', spec, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Species', new_admin_species_type_path %>

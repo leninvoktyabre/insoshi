@@ -44,6 +44,7 @@ class PeopleController < ApplicationController
   def new
     @body = "register single-col"
     @person = Person.new
+    @cities = City.find(:all)
 
     respond_to do |format|
       format.html
@@ -51,11 +52,25 @@ class PeopleController < ApplicationController
   end
 
   def create
+    # raise params[:person].inspect
     cookies.delete :auth_token
+    
     @person = Person.new(params[:person])
+    @cities = City.find(:all)
+    
     respond_to do |format|
       @person.email_verified = false if global_prefs.email_verifications?
       @person.identity_url = session[:verified_identity_url]
+      
+      if params[:person]['newcity'].length == 0
+        @person.city_id = params[:person]['city_id']
+      else
+        @new_city = City.new({:title => params[:person]['newcity'], :status => 0})
+        @new_city.save
+        @person.city_id = @new_city.id
+        # todo: letter for admin about a new city
+      end
+      
       @person.save
       if @person.errors.empty?
         session[:verified_identity_url] = nil
@@ -107,7 +122,8 @@ class PeopleController < ApplicationController
 
   def edit
     @person = Person.find(params[:id])
-
+    @cities = City.find(:all)
+    
     respond_to do |format|
       format.html
     end
@@ -115,9 +131,21 @@ class PeopleController < ApplicationController
 
   def update
     @person = Person.find(params[:id])
+    @cities = City.find(:all)
+    
     respond_to do |format|
       case params[:type]
       when 'info_edit'
+        
+        # if params[:person]['newcity'].length == 0
+        #   @person.city_id = params[:person]['city_id']
+        # else
+        #   @new_city = City.new({:title => params[:person]['newcity'], :status => 0})
+        #   @new_city.save
+        #   @person.city_id = @new_city.id
+        #   # todo: letter for admin about a new city
+        # end
+        
         if !preview? and @person.update_attributes(params[:person])
           flash[:success] = 'Profile updated!'
           format.html { redirect_to(@person) }

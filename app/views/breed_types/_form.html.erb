@@ -1,0 +1,20 @@
+<%= error_messages_for :breed %>
+
+<% form_for(@breed) do |f| %>
+	<div class="field">
+    <%= f.label :species_id %>
+    <%= f.collection_select(:species_id, @species, :id, :title) %>
+  </div>
+  <div class="field">
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+  </div>
+  <div class="field">
+    <%= f.label :status %>
+    <%= f.select(:status, BreedType::status_list) %>
+  </div>
+	<br>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

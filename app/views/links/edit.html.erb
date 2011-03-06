@@ -1,0 +1,30 @@
+<%- if logged_in? -%>
+	<%- column_div :type => :primary do -%>
+	  <h2>Editing link</h2>
+
+		<%= error_messages_for :link %>
+
+		<%- form_for([@category, @link]) do |f| -%>
+
+			<div class="form_row">
+	      <label for="title">Title</label>
+	      <%= f.text_field :title %>
+	    </div>
+
+	    <div class="form_row">
+	      <label for="description">Description</label>
+	      <%= f.text_area :description, :rows => 5 %>
+	    <div>
+		
+			<div class="form_row">
+	      <label for="url">URL</label>
+	      <%= f.text_field :url %>
+	    </div>
+
+	    <div class="form_row">
+	      <%= f.submit "Edit", :class => "button" %>
+	      <%= link_to "Cancel", category_links_path %>
+	    </div>
+	  <%- end -%>
+	<%- end -%>
+<%- end -%>

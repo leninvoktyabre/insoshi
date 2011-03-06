@@ -1,0 +1,25 @@
+<h2>Listing cities</h2>
+
+<table>
+  <tr>
+		<th>id</th>
+    <th>City</th>
+    <th>Status</th>
+    <th colspan="2">Controls</th>
+  </tr>
+
+<% n = 0%>
+<% @cities.each do |city| %>
+  <tr>
+		<td><%= n += 1 %></td>
+    <td><%= city.title %></td>
+    <td><%= City::status_list.invert[city.status] %></td>
+    <td><%= link_to 'Edit', edit_admin_city_path(city) %></td>
+    <td><%= link_to 'Destroy', city, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New City', new_admin_city_path %>

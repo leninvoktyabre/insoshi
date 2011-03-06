@@ -1,0 +1,22 @@
+<div id="settings" style="display: none;">
+  <% tabs = TabsRenderer.new(self, :id => "tabCol") %>
+
+  <% tabs.create('tBoard', 'Board') do %>
+    <%= render :partial => 'board' %>
+    <div class="clear"></div>
+  <% end %>
+
+	<% tabs.create('tCatalog', 'Catalog') do %>
+    <%= render :partial => 'catalog' %>
+    <div class="clear"></div>
+  <% end %>
+
+  <%= tabs.render %>
+</div>
+<script type='text/javascript'>
+  $(document).ready(function() {
+    // Set up the tabs.
+    $("#tabCol > ul").tabs();
+    $("#settings").show();
+  })
+</script>
