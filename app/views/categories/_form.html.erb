@@ -1,0 +1,46 @@
+<%= error_messages_for :category %>
+
+<% form_for(@category) do |f| %>
+  <div class="field">
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+  </div>
+  <div class="form_row">
+    <%= f.label :description %>
+    <%= f.text_area :description, :rows => 5 %>
+  <div>
+  <div class="field">
+    <%= f.label :parent_id %>
+    <% if @category.id != nil %>
+	
+	<% out = '' %>
+	<% @categories.map do |cat| %>
+	  <% if cat.id == @parent %>
+	    <% @parent = cat.parent_id.to_i %>
+	    <% @select_cat_id = cat.id.to_i %>
+	    
+	    <% out = render(:partial => 'subcat').insert(-9, out) %>
+	    
+	    <% retry %>
+	  <% end %>
+	<% end %>
+	
+	<%#= raise out.inspect %>
+	
+	<%= out %>
+      
+    <% else %>
+      
+      <%= render :partial => 'subcat' %>
+      
+    <% end %>
+  
+    <%= f.hidden_field :parent_id %>
+  </div>
+  <br>
+  <div class="actions" style="clear:both;">
+    <%= f.submit %>
+  </div>
+<% end %>
+
+<div id="subcat"></div>

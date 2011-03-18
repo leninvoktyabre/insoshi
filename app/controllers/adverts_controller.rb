@@ -29,6 +29,7 @@ class AdvertsController < ApplicationController
     @deals = DealType.find(:all)
     @species = SpeciesType.find(:all)
     @sex = SexType.find(:all)
+    @breeds = BreedType.find(:all)
     
     newspecies = params[:advert]['newspecies']
     params[:advert].delete('newspecies')

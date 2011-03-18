@@ -1,6 +1,5 @@
 class Advert < ActiveRecord::Base
   belongs_to :person
-  belongs_to :category
   belongs_to :city
   belongs_to :deal_type
   belongs_to :species_type

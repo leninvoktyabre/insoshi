@@ -1,8 +1,24 @@
 <h2><%= @person.name %>'s Pets </h2>
-<% if current_person?(@person)%>
-  <%= link_to "Add pet", new_pet_path %>
+
+<% if pets.size > 0 %>
+<ul id="pet_list" class="grid">
+  <table>
+    <tr>
+      <th>Name</th>
+      <th>Species</th>
+      <th>Breed</th>
+      <th>Sex</th>
+      <th>Date of birth</th>
+      <th>Color</th>
+      <th>Favorite food</th>
+      <th>Description</th>
+      <th colspan="2">Controls</th>
+    </tr>
+      <%= render :partial => "shared/pet", :collection => pets %>
+  </table>
+</ul>  
 <% end %>
 
-<ul id="pet_list" class="grid">
-  <%= render :partial => "shared/pet", :collection => pets %>
-</ul>  
+<% if current_person?(@person)%>
+  <%= link_to "Add pet", new_person_pet_path(@person) %>
+<% end %>

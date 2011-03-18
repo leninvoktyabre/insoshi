@@ -1,0 +1,22 @@
+<%- column_div :type => :primary do -%>
+  <h2>Categories</h2>
+
+	<ol class="list forum full">
+	  <%= render :partial => "category", :collection => @categories %>
+	</ol>
+
+	<%- if logged_in? -%>
+		<%= link_to "Add link", new_category_link_path(@parent) %>
+	<% end %>
+	<br />
+	<br />
+	<ol class="list forum full">
+	  <%= render :partial => "links/link", :collection => @links %>
+	</ol>
+	
+<% end %>
+
+<%- column_div :type => :secondary do -%>
+  <%= render :partial => 'searches/box' %>
+  <%= render :partial => 'shared/minifeed' %>
+<%- end -%>

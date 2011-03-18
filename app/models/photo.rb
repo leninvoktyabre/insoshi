@@ -30,6 +30,7 @@ class Photo < ActiveRecord::Base
   attr_protected :id, :person_id, :parent_id, :created_at, :updated_at
   
   belongs_to :person
+  belongs_to :pet
   has_attachment :content_type => :image,
                  :storage => :file_system,
                  :max_size => UPLOAD_LIMIT.megabytes,

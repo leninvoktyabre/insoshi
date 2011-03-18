@@ -1,0 +1,13 @@
+<% item = 0 %>
+<tr>
+  <td><%= pet.name %></td>
+  <td><%= item.title if item = SpeciesType.find_by_id(pet.species_id) %></td>
+  <td><%= item.title if item = BreedType.find_by_id(pet.breed_id) %></td>
+  <td><%= item.title if item = SexType.find_by_id(pet.sex_id) %></td>
+  <td><%= pet.date_of_birth %></td>
+  <td><%= pet.color %></td>
+  <td><%= pet.fav_food %></td>
+  <td><%= pet.description %></td>
+  <td><%= link_to 'Edit', edit_person_pet_path(@person, pet) %></td>
+  <td><%= link_to 'Destroy', person_pet_path(@person, pet), :confirm => 'Are you sure?', :method => :delete %></td>
+</tr>

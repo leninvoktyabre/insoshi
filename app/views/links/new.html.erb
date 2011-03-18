@@ -18,12 +18,12 @@
 		
 			<div class="form_row">
 	      <label for="url">URL</label>
-	      <%= f.text_field :url %>
+	      <%= f.text_field :url, :value => 'http://' %>
 	    </div>
 
 	    <div class="form_row">
 	      <%= f.submit "Create", :class => "button" %>
-	      <%= link_to "Cancel", category_links_path %>
+	      <%= link_to "Cancel", catalog_path(@category) %>
 	    </div>
 	  <%- end -%>
 	<%- end -%>

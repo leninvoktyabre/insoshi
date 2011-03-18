@@ -1,37 +1,4 @@
 <%- column_div :type => :primary do -%>
   <h2>New pet</h2>
-
-  <%- form_for(@pet) do |f| -%>
-    <div class="form_row">
-      <label for="species">Species</label>
-      <%= f.select :species, @pet.species_list %>
-    </div>
-    
-    <%= set_focus_to "pet_species" %>
-
-		<div class="form_row">
-      <label for="sex">Sex</label>
-      <%= f.select :sex, @pet.sex_list %>
-    </div>
-
-		<div class="form_row">
-      <label for="name">Name</label>
-      <%= f.text_field :name %>
-    </div>
-
-		<div class="form_row">
-      <label for="age">Age</label>
-      <%= f.text_field :age %>
-    </div>
-
-    <div class="form_row">
-      <label for="description">Description</label>
-      <%= f.text_area :description, :rows => 5 %>
-    <div>
-
-    <div class="form_row">
-      <%= f.submit "Create", :class => "button" %>
-      <%= link_to "Cancel", person_pets_path(current_person) %>
-    </div>
-  <%- end -%>
+  <%= render :partial => "form" %>
 <%- end -%>

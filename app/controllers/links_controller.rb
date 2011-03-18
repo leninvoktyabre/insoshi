@@ -11,14 +11,15 @@ class LinksController < ApplicationController
   
   def create
     @category = Category.find(params[:category_id])
-    @link = @category.links.create(params[:link])
+    @link = Link.new(params[:link])
     @link.person = current_person
+    @link.category_id = @category.id
     # raise @comment.inspect
     
     respond_to do |format|
       if @link.save
         flash[:success] = "New link successfully created"
-        format.html { redirect_to category_url(@category) }
+        format.html { redirect_to catalog_url(@category) }
       else
         format.html { render :action => "new" }
       end
@@ -31,13 +32,13 @@ class LinksController < ApplicationController
   end
   
   def update
-    @category = Advert.find(params[:category_id])
+    @category = Category.find(params[:category_id])
     @link = Link.find(params[:id])
 
     respond_to do |format|
       if @link.update_attributes(params[:link])
         flash[:success] = 'Link was successfully updated.'
-        format.html { redirect_to category_url(@category) }
+        format.html { redirect_to catalog_url(@category) }
       else
         format.html { render :action => "edit" }
       end
@@ -51,7 +52,7 @@ class LinksController < ApplicationController
 
     respond_to do |format|
       flash[:success] = 'Link was successfully destroyed.'
-      format.html { redirect_to category_url(@category) }
+      format.html { redirect_to catalog_url(@category) }
     end
   end
   

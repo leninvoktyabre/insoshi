@@ -6,6 +6,9 @@
                   messages_path %>
     </div>
   <%- end -%>
+  <% if logged_in? %>
+    <%= render :partial => 'wall' %>
+  <% end %>
   <%= render :partial => 'feed' %>
 <%- end -%>
 

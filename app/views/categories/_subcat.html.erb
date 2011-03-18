@@ -1,0 +1,15 @@
+<% categories = @categories.find_all{|cat| cat.parent_id == @parent.to_i} %>
+
+<% if !categories.empty? %>
+  <div style="float:left">
+  <% if @parent.to_i != 0 %>
+  <span>&nbsp;&nbsp;>&nbsp;</span>
+  <% end %>
+  <select class="categories" onchange="<%= remote_function(:update => "subcat_for_parent_#{@parent}",
+     :url => {:action => :get_subcat}, :with => "'parent=' + this.value") %>; preValue = $(this).parent('div').prev('select').val(); if (this.value == 0 && preValue) $('#category_parent_id').val(preValue); else $('#category_parent_id').val(this.value);">
+    <option value="0">Нет</option>
+    <%= options_from_collection_for_select(categories, :id, :title, @select_cat_id.to_i) %> 
+  </select>
+  </div>
+  <div id="subcat_for_parent_<%= @parent %>"></div>
+<% end %>

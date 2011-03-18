@@ -1,0 +1,21 @@
+<% item = 0 %>
+<h2><%= @pet.name %></h2>
+<table>
+  <tr>
+    <td valign="top">
+      <%= image_link @pet, :class => "photo", :image => :thumbnail %>
+    </td>
+    <td valign="top">
+      Из личного досье:
+      <br />
+      <%= "Класс - #{item.title if item = SpeciesType.find_by_id(@pet.species_id)}<br />
+      Порода - #{item.title if item = BreedType.find_by_id(@pet.breed_id)}<br />
+      Пол - #{item.title if item = SexType.find_by_id(@pet.sex_id)}<br />
+      Окрас - #{@pet.color}<br />
+      Любимая еда - #{@pet.fav_food}<br />
+      Отличительные особенности - #{@pet.description}<br />
+      Хозяин - #{person_link item, :class => "url fn" if item = Person.find_by_id(@pet.person_id)}<br />
+      Откликается на кличку - #{@pet.name}" %>
+    </td>
+  </tr>
+</table>

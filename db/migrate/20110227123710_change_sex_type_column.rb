@@ -5,7 +5,7 @@ class ChangeSexTypeColumn < ActiveRecord::Migration
   end
 
   def self.down
-    remove_column :adverts, :ex_id
+    remove_column :adverts, :sex_id
     add_column :adverts, :sex, :string
   end
 end

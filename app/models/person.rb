@@ -400,6 +400,10 @@ class Person < ActiveRecord::Base
     ['Москва', 'Питер']
   end
   
+  def pets
+    Pet.find(:all, :conditions => ["person_id = ? AND status = 1", id], :order => "created_at DESC")
+  end
+  
   protected
 
     ## Callbacks

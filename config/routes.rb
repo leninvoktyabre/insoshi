@@ -1,6 +1,5 @@
 ActionController::Routing::Routes.draw do |map|
-  # map.resources :categories
-  # map.resources :links
+
   map.resources :events, :member => { :attend => :get, 
                                       :unattend => :get } do |event|
     event.resources :comments
@@ -18,14 +17,18 @@ ActionController::Routing::Routes.draw do |map|
                                   :requirements => { :method => :get }
   map.resource :session
   map.resource :galleries
+  
+  map.connect 'pets/get_breed/:id', :controller => 'pets',
+                                   :action => 'get_breed'
+  
   map.resources :pets
   map.resources :adverts
-  map.resources :categories
   map.resources :cities
   map.resources :deal_types
   map.resources :species_types
   map.resources :sex_types
   map.resources :breed_types
+  #map.resources :categories
   map.resources :messages, :collection => { :sent => :get, :trash => :get },
                            :member => { :reply => :get, :undestroy => :put }
 
@@ -33,6 +36,7 @@ ActionController::Routing::Routes.draw do |map|
                                       :common_contacts => :get }
   map.connect 'people/verify/:id', :controller => 'people',
                                    :action => 'verify_email'
+    
   map.resources :people do |person|
      person.resources :messages
      person.resources :galleries
@@ -42,26 +46,37 @@ ActionController::Routing::Routes.draw do |map|
      person.resources :adverts
   end
   
-  map.resources :adverts do |advert|
-    advert.resources :advert_comments
-  end
-  
+  map.resources :catalogs
+  #map.resources :links
   map.resources :categories do |category|
     category.resources :links
   end
-  
+
+  #map.match 'catalogs/*id', :controller => 'catalogs', :action => 'show'
+    
+  map.resources :adverts do |advert|
+    advert.resources :advert_comments
+  end
+    
   map.resources :galleries do |gallery|
     gallery.resources :photos
   end
+  
+  map.connect 'admin/categories/get_subcat/:id', :controller => 'categories',
+                                   :action => 'get_subcat'
+  
   map.namespace :admin do |admin|
     admin.resources :people, :preferences
-    admin.resources :settings, :cities, :deal_types, :species_types, :sex_types, :breed_types
+    admin.resources :settings
+    admin.resources :cities, :deal_types, :species_types, :sex_types, :breed_types
+    admin.resources :categories
     admin.resources :forums do |forums|
       forums.resources :topics do |topic|
         topic.resources :posts
       end
     end    
   end
+    
   map.resources :blogs do |blog|
     blog.resources :posts do |post|
         post.resources :comments

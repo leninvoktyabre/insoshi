@@ -1,0 +1,65 @@
+<%= error_messages_for :pet %>
+
+<%- form_for(@pet) do |f| -%>
+  
+  <div class="form_row">
+    <%= f.label :species_id %>
+    <select name="pet[species_id]" id="species_id" onchange="if (this.value == 0) {$('#nospecies').show(); $('#breed').hide();} else { $('#nospecies').hide(); $('#breed').show(); <%= remote_function(:update => "breed",
+   :url => {:action => :get_breed}, :with => "'species_id=' + this.value") %>;}">
+    <%= options_from_collection_for_select(
+      @species.find_all{|species| species.status == SpeciesType.status_list['active']}, :id, :title, @pet.species_id) %>
+      <option value="0" <% if @pet.id and @pet.species_id == 0 %>selected<% end %>>Not in list</option>
+    </select>
+
+    <div id="nospecies" class="hide">
+      <%= f.label :new_species, 'New species' %>
+      <%= f.text_field :new_species %>
+      <%= f.label :new_breed, 'New breed' %>
+      <%= f.text_field :new_breed %>
+    </div>
+  </div>
+  
+  <div class="form_row" id="breed"></div>
+
+  <div class="form_row">
+    <%= f.label :sex_id %>
+      <%= f.collection_select(:sex_id, 
+	      @sex.find_all{|sex| sex.status == SexType.status_list['active']}, :id, :title) %>
+  </div>
+
+  <div class="form_row">
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+
+  <div class="form_row">
+    <%= f.label :date_of_birth %>
+    <%= f.text_field :date_of_birth, :id => 'datepicker' %>
+  </div>
+  
+  <div class="form_row">
+    <%= f.label :color %>
+    <%= f.text_field :color, :rows => 5 %>
+  <div>
+    
+  <div class="form_row">
+    <%= f.label :fav_food %>
+    <%= f.text_field :fav_food %>
+  </div>
+  
+  <div class="form_row">
+    <%= f.label :description %>
+    <%= f.text_area :description, :rows => 5 %>
+  </div>
+
+  <div class="form_row">
+    <%= f.submit "Create", :class => "button" %>
+    <%= link_to "Cancel", person_path(current_person, :anchor => 'tPets') %>
+  </div>
+<%- end -%>
+
+<script>
+$(document).ready(function(){
+  $('#species_id').change();
+});
+</script>

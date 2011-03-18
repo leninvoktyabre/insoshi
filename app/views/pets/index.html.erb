@@ -1,1 +1,15 @@
-index
+<%- column_div :type => :primary do -%>
+  <% unless @pets.empty? -%>
+    <h2>Pets</h2>
+    <%= will_paginate %>
+    <ul class="list pets">
+      <%= render :partial => 'pet', :collection => @pets %>
+    </ul>
+    <%= will_paginate %>
+  <% end -%>
+<%- end -%>
+
+<%- column_div :type => :secondary do -%>
+  <%= render :partial => 'searches/box' %>
+  <%= render :partial => 'shared/minifeed' %>
+<%- end -%>

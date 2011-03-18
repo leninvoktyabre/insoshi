@@ -1,0 +1,17 @@
+<div id="catalog" style="display: none;">
+  <% tabs = TabsRenderer.new(self, :id => "catalogCol") %>
+
+  <% tabs.create('tCategories', 'Categories') do %>
+    <%= render :partial => 'categories/categories' %>
+    <div class="clear"></div>
+  <% end %>
+
+  <%= tabs.render %>
+</div>
+<script type='text/javascript'>
+  $(document).ready(function() {
+    // Set up the tabs.
+    $("#catalogCol > ul").tabs();
+    $("#catalog").show();
+  })
+</script>

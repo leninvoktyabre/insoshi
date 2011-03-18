@@ -11,8 +11,9 @@ module ApplicationHelper
   ## Menu helpers
   
   def menu
-    home     = menu_element("Dashboard",   home_path)
+    home     = menu_element("Home",   home_path)
     people   = menu_element("People", people_path)
+    pets   = menu_element("Pets", pets_path)
     if Forum.count == 1
       forum = menu_element("Forum", forum_path(Forum.find(:first)))
     else
@@ -29,11 +30,11 @@ module ApplicationHelper
       #                        person_connections_path(current_person))
       events   = menu_element("Events", events_path)
       
-      board = menu_element("Board", adverts_path)
-      catalog = menu_element("Catalog", categories_path)
+      board = menu_element("Classifieds", adverts_path)
+      catalog = menu_element("Catalog", catalogs_path)
       
       #links = [home, profile, contacts, messages, blog, people, forum]
-      links = [home, profile, people, forum, board, catalog]
+      links = [home, profile, people, pets, forum, board, catalog]
       # TODO: put this in once events are ready.
       # links.push(events)
       
@@ -45,7 +46,7 @@ module ApplicationHelper
                              admin_forums_path)
       preferences = menu_element("Prefs", admin_preferences_path)
       #cities = menu_element("Cities", admin_cities_path)
-      links = [settings, home, people, forums, preferences]
+      links = [settings, home, people, pets, forums, preferences]
     else
       links = [home, people]
     end

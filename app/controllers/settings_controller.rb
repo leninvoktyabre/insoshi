@@ -5,5 +5,7 @@ class SettingsController < ApplicationController
     @species = SpeciesType.find(:all)
     @sex = SexType.find(:all)
     @breeds = BreedType.find(:all)
+    
+    @categories = Category.find :all
   end
 end
