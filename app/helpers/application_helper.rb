@@ -48,7 +48,7 @@ module ApplicationHelper
       #cities = menu_element("Cities", admin_cities_path)
       links = [settings, home, people, pets, forums, preferences]
     else
-      links = [home, people]
+      links = [home, people, pets]
     end
     if global_prefs.about.blank?
       links

@@ -1,5 +1,6 @@
 class Pet < ActiveRecord::Base
   belongs_to :person
+  belongs_to :rating
   
   has_many :photos, :dependent => :destroy, :order => 'created_at'
 

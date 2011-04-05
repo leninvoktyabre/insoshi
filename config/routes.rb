@@ -18,6 +18,11 @@ ActionController::Routing::Routes.draw do |map|
   map.resource :session
   map.resource :galleries
   
+  map.connect 'ratings/get_rating/:object/:object_id', :controller => 'ratings',
+                                   :action => 'get_rating'
+  map.connect 'ratings/set_rating/:object/:object_id/:value', :controller => 'ratings',
+                                   :action => 'set_rating'
+  
   map.connect 'pets/get_breed/:id', :controller => 'pets',
                                    :action => 'get_breed'
   

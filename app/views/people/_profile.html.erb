@@ -65,8 +65,14 @@
           </li>
           <%- end -%>
         <li><%= email_link(@person) %></li>
+        
+        <%= render :partial => 'ratings/set_rating', :locals => {:object => @person.class.name, :object_id => @person.id} %>
+	
       <%- end -%>
     </ul>
   <%- end -%>
+  
+  <%= render :partial => 'ratings/get_rating', :locals => {:object => @person.class.name, :object_id => @person.id} %>
+  
 </div>
 <%= display @person.description %>

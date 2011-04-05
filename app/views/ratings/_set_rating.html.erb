@@ -1,0 +1,19 @@
+<%= link_to_remote image_tag("/images/button_yes.gif"),
+  :update => "rating-thanks",
+  :url => {
+    :controller => "ratings",
+    :action => "set_rating",
+    :params => {:object => object, :object_id => object_id, :value => 'yes'}
+  },
+  :html => {:id => "button_yes"}
+%>
+<%= link_to_remote image_tag("/images/button_no.gif"),
+  :update => "rating-thanks",
+  :url => {
+    :controller => "ratings",
+    :action => "set_rating",
+    :params => {:object => object, :object_id => object_id, :value => 'no'}
+  },
+  :html => {:id => "button_no"}
+%>
+<div id="rating-thanks"></div>

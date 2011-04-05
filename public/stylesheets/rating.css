@@ -1,0 +1,7 @@
+#button_yes {
+  height:32px;
+  width:32px;
+  background-image: url(/images/button_yes.gif);
+  background-repeat: no-repeat;
+  background-position: center;
+}

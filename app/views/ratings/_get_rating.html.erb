@@ -1,0 +1,9 @@
+<div class="rating-stats">
+  <% rating = 0 %>
+  <% votes = Rating.find_all_by_object_and_object_id(object, object_id) %>
+  <% if votes_count = votes.size %>
+    <% votes.map{|r| rating += r.value} %>
+  <% end %>
+  <% rating = (rating >= 0) ? "+#{rating}" : "#{rating}" %>
+  <%= "rating: #{rating}, votes: #{votes_count}" %>
+</div>

@@ -1,4 +1,4 @@
-class BlogsController < ApplicationController
+class BlbogsController < ApplicationController
 
   before_filter :login_required
 
