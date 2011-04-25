@@ -18,6 +18,8 @@ class LinksController < ApplicationController
     
     respond_to do |format|
       if @link.save
+        Point.add(@link)
+
         flash[:success] = "New link successfully created"
         format.html { redirect_to catalog_url(@category) }
       else
@@ -48,6 +50,7 @@ class LinksController < ApplicationController
   def destroy
     @category = Category.find(params[:category_id])
     @link = Link.find(params[:id])
+    Point.remove(@link)
     @link.destroy
 
     respond_to do |format|

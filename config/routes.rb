@@ -1,4 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
+ 
+  #map.filter :locale
 
   map.resources :events, :member => { :attend => :get, 
                                       :unattend => :get } do |event|
@@ -33,6 +35,12 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :species_types
   map.resources :sex_types
   map.resources :breed_types
+  map.resources :gifts do |g|
+    g.resources :people
+  end
+  map.resources :gift_types do |gt|
+    gt.resources :gifts
+  end
   #map.resources :categories
   map.resources :messages, :collection => { :sent => :get, :trash => :get },
                            :member => { :reply => :get, :undestroy => :put }
@@ -49,8 +57,9 @@ ActionController::Routing::Routes.draw do |map|
      person.resources :comments
      person.resources :pets
      person.resources :adverts
+     person.resources :gifts
   end
-  
+      
   map.resources :catalogs
   #map.resources :links
   map.resources :categories do |category|
@@ -75,6 +84,7 @@ ActionController::Routing::Routes.draw do |map|
     admin.resources :settings
     admin.resources :cities, :deal_types, :species_types, :sex_types, :breed_types
     admin.resources :categories
+    admin.resources :gift_types
     admin.resources :forums do |forums|
       forums.resources :topics do |topic|
         topic.resources :posts

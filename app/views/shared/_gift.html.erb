@@ -1,0 +1,11 @@
+
+<tr>
+  <td><%= gift.title %></td>
+  <td><%= gift.costs %></td>
+  <td><%= gift.image_path %></td>
+	<% if gift.costs.to_i <= Point.get_points(current_person).to_i %>
+		<td><%= link_to "Make a Gift", new_gift_path(:person => person, :type => gift) %></td>
+	<% else %>
+		<td>Not enough points</td>
+	<% end %>
+</tr>

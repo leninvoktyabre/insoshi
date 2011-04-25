@@ -1,0 +1,17 @@
+<div id="gift" style="display: none;">
+  <% tabs = TabsRenderer.new(self, :id => "giftCol") %>
+
+  <% tabs.create('tGifts', 'Gifts') do %>
+    <%= render :partial => 'gift_types/gifts' %>
+    <div class="clear"></div>
+  <% end %>
+
+  <%= tabs.render %>
+</div>
+<script type='text/javascript'>
+  $(document).ready(function() {
+    // Set up the tabs.
+    $("#giftCol > ul").tabs();
+    $("#gift").show();
+  })
+</script>

@@ -1,7 +1,7 @@
 <h2><%= @person.name %>'s Pets </h2>
 
 <% if pets.size > 0 %>
-<ul id="pet_list" class="grid">
+
   <table>
     <tr>
       <th>Name</th>
@@ -16,7 +16,7 @@
     </tr>
       <%= render :partial => "shared/pet", :collection => pets %>
   </table>
-</ul>  
+
 <% end %>
 
 <% if current_person?(@person)%>

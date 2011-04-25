@@ -1,7 +1,9 @@
 class AdvertsController < ApplicationController
   
   def index
-    @adverts = Advert.find(:all)
+    @adverts = Advert.find_all_by_status(1)
+    
+    #@adverts = Advert.active
     @filters = @adverts
 
     @adverts = @adverts.find_all{|advert| advert.city_id.to_s == cookies[:city_id]} if cookies[:city_id] != nil
@@ -10,7 +12,10 @@ class AdvertsController < ApplicationController
     @adverts = @adverts.find_all{|advert| advert.sex_id.to_s == cookies[:sex_id]} if cookies[:sex_id] != nil
     @adverts = @adverts.find_all{|advert| advert.breed_id.to_s == cookies[:breed_id]} if cookies[:breed_id] != nil
     
-    @adverts = @adverts.paginate(:page => params[:page])
+    @adverts = @adverts.paginate(:page => params[:page],
+                                 :per_page => RASTER_PER_PAGE)
+ 
+    #@adverts = @adverts.active(params[:page])
   end
   
   def show
@@ -39,7 +44,10 @@ class AdvertsController < ApplicationController
     
     @advert = current_person.adverts.build(params[:advert])
     
+    @advert.status = 1
+
     if newspecies.length > 0
+      @advert.status = 0
       @new_species = SpeciesType.new({:title => newspecies, :status => 0})
       @new_species.save
       @advert.species_id = @new_species.id
@@ -47,6 +55,7 @@ class AdvertsController < ApplicationController
     end
     
     if newbreed.length > 0
+      @advert.status = 0
       @new_breed = BreedType.new({:title => newbreed, :status => 0})
       @new_breed.save
       @advert.breed_id = @new_breed.id
@@ -56,9 +65,10 @@ class AdvertsController < ApplicationController
     @advert.title = DealType.find_by_id(@advert.deal_id).title + 
       ' ' + SpeciesType.find_by_id(@advert.species_id).title #todo: move into model
     @advert.city_id = current_person.city_id
-    
+
     respond_to do |format|
       if @advert.save
+        Point.add(@advert)
         flash[:success] = "New advertisement successfully created"
         format.html { redirect_to adverts_url }
       else
@@ -91,6 +101,7 @@ class AdvertsController < ApplicationController
   
   def destroy
     @advert = Advert.find(params[:id])
+    Point.remove(@advert)
     @advert.destroy
 
     respond_to do |format|

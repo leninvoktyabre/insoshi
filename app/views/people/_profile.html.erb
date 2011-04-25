@@ -12,7 +12,13 @@
 <%- if current_person?(@person) -%>
   <%= link_to "Edit profile", edit_person_path(@person) %> |
   <%= link_to "Change photo", @person.galleries.first %>
+	<br>
+	<p><%= "You have #{Point.get_points(@person)} points" %></p>
 <%- end -%>
+
+<p>My gifts:</p>
+<%= render :partial => "gifts/gift", :collection => @gifts %>
+
 <%- if current_person?(@person) || current_person.admin? -%>
     <div class="clear"></div>
   </div>
@@ -76,3 +82,4 @@
   
 </div>
 <%= display @person.description %>
+

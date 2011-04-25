@@ -1,6 +1,7 @@
 class Link < ActiveRecord::Base
   belongs_to :category
   belongs_to :person
+  belongs_to :point
   
   validates_presence_of :url, :title, :description, :person_id, :category_id
   

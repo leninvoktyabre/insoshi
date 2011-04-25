@@ -5,6 +5,7 @@
 	  <%= render :partial => "advert", :collection => @adverts %>
 	</ol>
 
+        <%= will_paginate(@adverts) %>
 	<%- if logged_in? -%>
 		<%= link_to "Add advertisement", new_person_advert_path(current_person) %>
 	<% end %>

@@ -1,0 +1,24 @@
+<%= error_messages_for :gift %>
+
+<% form_for(@gift) do |f| %>
+  <div class="field">
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+  </div>
+  <div class="field">
+    <%= f.label :costs %>
+    <%= f.text_field :costs %>
+  </div>
+  <div class="field">
+    <%= f.label :image_path %>
+    <%= f.text_field :image_path %>
+  </div>
+  <div class="field">
+    <%= f.label :status %>
+    <%= f.select(:status, GiftType::status_list) %>
+  </div>
+	<br>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

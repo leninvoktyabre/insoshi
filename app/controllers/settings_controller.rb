@@ -7,5 +7,7 @@ class SettingsController < ApplicationController
     @breeds = BreedType.find(:all)
     
     @categories = Category.find :all
+    
+    @gifts = GiftType.find :all
   end
 end

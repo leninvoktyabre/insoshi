@@ -1,0 +1,2 @@
+<% gift_type = GiftType.find(gift.gift_id) %>
+<%= image_tag(gift_type.image_path, { :title => gift_type.title, :style => 'width:64px' }) %>

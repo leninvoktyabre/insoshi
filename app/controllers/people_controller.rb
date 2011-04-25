@@ -17,6 +17,7 @@ class PeopleController < ApplicationController
   
   def show
     @person = Person.find(params[:id])
+    #raise @person.inspect
     unless @person.active? or current_person.admin?
       flash[:error] = "That person is not active"
       redirect_to home_url and return
@@ -34,6 +35,10 @@ class PeopleController < ApplicationController
       @galleries = @person.galleries.paginate(:page => params[:page])
       @guests = @person.guests
       @pets = @person.pets
+      
+      #@points = Point.sum(:value, :conditions => ["person_id = ? AND status = ?", current_person.id, 1])
+      @gift_types = GiftType.find_all_by_status(1)
+      @gifts = Gift.find_all_by_status_and_recipient_id(1, @person.id)
       
     end
     respond_to do |format|
@@ -72,6 +77,7 @@ class PeopleController < ApplicationController
       end
       
       @person.save
+      Point.add(@person, @person.id)
       if @person.errors.empty?
         session[:verified_identity_url] = nil
         if global_prefs.email_verifications?

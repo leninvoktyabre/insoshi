@@ -12,9 +12,23 @@ class ApplicationController < ActionController::Base
   before_filter :create_page_view, :require_activation, :tracker_vars,
                 :admin_warning
 
+  before_filter :set_locale
+  
+  def set_locale
+    I18n.locale = params[:locale]
+  end
+     
+  def default_url_options(options={})
+    { :locale => I18n.locale } 
+  end 
+
   # See ActionController::RequestForgeryProtection for details
   # Uncomment the :secret if you're not using the cookie session store
   protect_from_forgery # :secret => '71a8c82e6d248750397d166001c5e308'
+  
+  def set_locale
+    I18n.locale = params[:locale]
+  end
 
   private
 

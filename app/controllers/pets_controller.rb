@@ -37,6 +37,7 @@ class PetsController < ApplicationController
     
     respond_to do |format|
       if @pet.save
+        Point.add(@pet)
         flash[:success] = "New pets profile successfully created"
         format.html { redirect_to person_url(current_person, :anchor => 'tPets') }
       else
@@ -73,6 +74,8 @@ class PetsController < ApplicationController
   
   def destroy
     @pet = Pet.find(params[:id])
+    Rating.remove(@pet)
+    Point.remove(@pet)
     @pet.destroy
 
     respond_to do |format|

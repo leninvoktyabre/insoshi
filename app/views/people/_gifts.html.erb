@@ -1,0 +1,12 @@
+<h2>Make a gift to <%= @person.name %></h2>
+
+  <table>
+    <tr>
+      <th>Title</th>
+      <th>Costs</th>
+      <th>Image</th>
+      <th>Controls</th>
+    </tr>
+      <%= render :partial => "shared/gift", :collection => @gift_types, :locals => { :person => person } %>
+  </table>
+

@@ -1,0 +1,18 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See http://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+en:
+  home:
+    dashboard:          "Dashboard"
+    people:             "People"
+    pets:               "Pets"
+    forum:              "Forum"
+    classifieds:        "Classidieds"
+    catalog:            "Catalog"
+    resources:          "Resources"
+
+  forum:
+    forums:             "Forums"
+ 
+  person:
+    profile_tab:        "Profile"

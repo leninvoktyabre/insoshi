@@ -11,18 +11,18 @@ module ApplicationHelper
   ## Menu helpers
   
   def menu
-    home     = menu_element("Home",   home_path)
-    people   = menu_element("People", people_path)
-    pets   = menu_element("Pets", pets_path)
+    home     = menu_element(t("home.dashboard"),   home_path)
+    people   = menu_element(t("home.people"), people_path)
+    pets   = menu_element(t("home.pets"), pets_path)
     if Forum.count == 1
-      forum = menu_element("Forum", forum_path(Forum.find(:first)))
+      forum = menu_element(t('home.forum'), forum_path(Forum.find(:first)))
     else
-      forum = menu_element("Forums", forums_path)
+      forum = menu_element(t('forum.forums'), forums_path)
     end
-    resources = menu_element("Resources", "http://docs.insoshi.com/")
+    resources = menu_element(t('home.resources'), "http://docs.insoshi.com/")
 
     if logged_in? and not admin_view?
-      profile  = menu_element("Profile",  person_path(current_person))
+      profile  = menu_element(t('person.profile_tab'),  person_path(current_person))
       #messages = menu_element("Messages", messages_path)
       #blog     = menu_element("Blog",     blog_path(current_person.blog))
       #photos   = menu_element("Photos",   photos_path)
@@ -30,8 +30,8 @@ module ApplicationHelper
       #                        person_connections_path(current_person))
       events   = menu_element("Events", events_path)
       
-      board = menu_element("Classifieds", adverts_path)
-      catalog = menu_element("Catalog", catalogs_path)
+      board = menu_element(t("home.classifieds"), adverts_path)
+      catalog = menu_element(t("home.catalog"), catalogs_path)
       
       #links = [home, profile, contacts, messages, blog, people, forum]
       links = [home, profile, people, pets, forum, board, catalog]

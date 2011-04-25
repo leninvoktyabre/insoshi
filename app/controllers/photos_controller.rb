@@ -42,6 +42,7 @@ class PhotosController < ApplicationController
 
     respond_to do |format|
       if @photo.save
+        Point.add(@photo)
         flash[:success] = "Photo successfully uploaded"
         format.html { redirect_to @photo.gallery }
       else
@@ -66,6 +67,7 @@ class PhotosController < ApplicationController
   def destroy
     @gallery = @photo.gallery
     redirect_to person_galleries_path(current_person) and return if @photo.nil?
+    Point.remove(@photo)
     @photo.destroy
     flash[:success] = "Photo deleted"
     respond_to do |format|

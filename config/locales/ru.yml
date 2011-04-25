@@ -1,0 +1,15 @@
+ru:
+  home:
+    dashboard:          "Домашняя"
+    people:             "Люди"
+    pets:               "Питомцы"
+    forum:              "Форум"
+    classifieds:        "Объявления"
+    catalog:            "Каталог"
+    resources:          "Ресурсы"
+    
+  forum:
+    forums:             "Форумы"
+    
+  person:
+    profile_tab:        "Профайл"

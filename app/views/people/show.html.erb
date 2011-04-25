@@ -41,6 +41,11 @@
     <div class="clear"></div>
   <% end %>
 
+  <% tabs.create('tGifts', 'Gifts') do %>
+    <%= render :partial => 'gifts', :locals => { :person => @person } %>
+    <div class="clear"></div>
+  <% end %>
+
   <%= tabs.render %>
 </div>
 <script type='text/javascript'>

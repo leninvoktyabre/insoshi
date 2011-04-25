@@ -6,8 +6,13 @@
     <div class="clear"></div>
   <% end %>
 
-	<% tabs.create('tCatalog', 'Catalog') do %>
+  <% tabs.create('tCatalog', 'Catalog') do %>
     <%= render :partial => 'catalog' %>
+    <div class="clear"></div>
+  <% end %>
+
+  <% tabs.create('tGift', 'Gift') do %>
+    <%= render :partial => 'gift' %>
     <div class="clear"></div>
   <% end %>
 

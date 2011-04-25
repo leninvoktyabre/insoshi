@@ -102,8 +102,11 @@ class Person < ActiveRecord::Base
   has_many :pets
   has_many :adverts
   has_many :links
+  has_many :gifts
   
   belongs_to :city
+  belongs_to :rating
+  belongs_to :point
 
   validates_presence_of     :email, :name
   validates_presence_of     :password,              :if => :password_required?
