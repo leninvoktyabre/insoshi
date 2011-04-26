@@ -1,9 +1,29 @@
-<li class="vcard person">
-  <div class="profile-image">
-    <%= image_link pet, :class => "photo", :image => :thumbnail %>
-  </div>
-  <p><%= pet_link pet, :class => "url fn" %></p>
-  <%= display(truncate(pet.description, :length => 150),
-              :class => "note") %>
-  <div class="clear"></div>
-</li>
+<%- if admin? or pet.status == 1 -%>
+	<li class="vcard person">
+	  <div class="profile-image" style="">
+	    <%= image_link pet, :class => "photo", :image => :thumbnail %>
+	  </div>
+	  <p>
+			<%= pet_link pet, :class => "url fn" %>
+		
+			<%- if current_person?(pet.person) or admin? -%>
+	      <%= link_to image_tag("icons/page_white_edit.png",
+	                            :class => 'actioner'),
+	                  edit_pet_path(pet) %>
+	      <%= link_to image_tag("icons/page_white_delete.png",
+	                            :class => 'actioner'),
+	                  pet_path(pet),
+	                  :method => :delete,
+	                  :confirm => "Delete this pet?" %>
+	
+										<% if pet.status != 1 %>
+											<span style="color:red">Проверить!</span>
+										<% end %>
+	    <%- end -%>
+
+		</p>
+	  <%= display(truncate(pet.description, :length => 150),
+	              :class => "note") %>
+	  <div class="clear"></div>
+	</li>
+<% end %>

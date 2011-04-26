@@ -2,7 +2,8 @@ class PetsController < ApplicationController
    
   def index
     #@person = Person.find(params[:person_id])
-    @pets = Pet.find_all_by_status(Pet.status_list['active']).paginate :page => params[:page]
+    #@pets = Pet.find_all_by_status(Pet.status_list['active']).paginate :page => params[:page]
+    @pets = Pet.find(:all).paginate :page => params[:page]
   end
   
   def show

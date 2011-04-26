@@ -15,8 +15,8 @@ class Point < ActiveRecord::Base
     def add(object, person_id = false)
       #raise object.class.name.inspect
       if object.class.name.to_s == 'Gift'
-        gift_type = GiftType.find(object.gift_id)
-        value = -gift_type.costs
+        #gift_type = GiftType.find(object.gift_id)
+        value = -object.gift_type.costs
       else
         value = "#{Point}::POINT_FOR_#{object.class.name.upcase}".constantize
       end
