@@ -52,6 +52,13 @@
     <%= f.text_area :description, :rows => 5 %>
   </div>
 
+<% if admin? %>
+	<div class="field_row">
+    <%= f.label :status %>
+    <%= f.select(:status, Pet::status_list) %>
+  </div>
+<% end %>
+
   <div class="form_row">
     <%= f.submit "Create", :class => "button" %>
     <%= link_to "Cancel", person_path(current_person, :anchor => 'tPets') %>

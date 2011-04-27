@@ -14,6 +14,7 @@ class LinksController < ApplicationController
     @link = Link.new(params[:link])
     @link.person = current_person
     @link.category_id = @category.id
+    @link.status = 1
     # raise @comment.inspect
     
     respond_to do |format|

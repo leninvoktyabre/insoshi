@@ -8,10 +8,17 @@ module SearchesHelper
   end
   
   def search_type
+    #raise params.inspect
     if params[:controller] == "forums" or params[:model] == "ForumPost"
       "Forums" 
     elsif params[:controller] == "messages" or params[:model] == "Message"
       "Messages"
+    elsif params[:controller] == "pets" or params[:model] == "Pet"
+      "Pets"
+    elsif params[:controller] == "adverts" or params[:model] == "Advert"
+      "Adverts"
+    elsif params[:controller] == "catalogs" or params[:model] == "Catalog"
+      "Catalogs"
     else
       "People"
     end

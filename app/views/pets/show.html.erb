@@ -12,7 +12,7 @@
 	<li><%= "Класс - #{item.title if item = SpeciesType.find_by_id(@pet.species_id)}" %></li>
 	<li><%= "Порода - #{item.title if item = BreedType.find_by_id(@pet.breed_id)}" %></li>
 	<li><%= "Пол - #{item.title if item = SexType.find_by_id(@pet.sex_id)}" %></li>
-	<li><%= "День рождения - #{@pet.date_of_birth.strftime('%d-%m-%Y')}" %></li>
+	<li><%= "День рождения - #{@pet.date_of_birth.strftime('%d-%m-%Y')}" if @pet.date_of_birth != nil %></li>
 	<li><%= "Окрас - #{@pet.color}" %></li>
 	<li><%= "Любимая еда - #{@pet.fav_food}" %></li>
 	<li><%= "Отличительные особенности - #{@pet.description}" %></li>
