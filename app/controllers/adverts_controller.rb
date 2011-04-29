@@ -1,7 +1,7 @@
 class AdvertsController < ApplicationController
   
   def index
-    @adverts = Advert.find_all_by_status(1)
+    @adverts = Advert.find(:all, :order => 'created_at DESC')
     
     #@adverts = Advert.active
     @filters = @adverts
@@ -35,35 +35,27 @@ class AdvertsController < ApplicationController
     @species = SpeciesType.find(:all)
     @sex = SexType.find(:all)
     @breeds = BreedType.find(:all)
-    
-    newspecies = params[:advert]['newspecies']
-    params[:advert].delete('newspecies')
-    
-    newbreed = params[:advert]['newbreed']
-    params[:advert].delete('newbreed')
-    
+    #raise params.inspect    
     @advert = current_person.adverts.build(params[:advert])
     
     @advert.status = 1
 
-    if newspecies.length > 0
+    if params[:advert][:species_id].to_i == 0
       @advert.status = 0
-      @new_species = SpeciesType.new({:title => newspecies, :status => 0})
-      @new_species.save
-      @advert.species_id = @new_species.id
-      # todo: letter for admin about a new species
+      @advert.species_id = 0
+      @advert.breed_id = 0
+      # todo: sand email to admin about new species and new breed
+      
+      new_species = SpeciesType.new({:title => params[:advert][:new_species], :status => 0})
+      new_species.save     
+      BreedType.new({:title => params[:advert][:new_breed], :species_id => new_species.id, :status => 0}).save
+
     end
     
-    if newbreed.length > 0
-      @advert.status = 0
-      @new_breed = BreedType.new({:title => newbreed, :status => 0})
-      @new_breed.save
-      @advert.breed_id = @new_breed.id
-      # todo: letter for admin about a new breed
-    end
-    
+    species = @advert.species_id != 0 ? SpeciesType.find_by_id(@advert.species_id).title : params[:advert][:new_species]
     @advert.title = DealType.find_by_id(@advert.deal_id).title + 
-      ' ' + SpeciesType.find_by_id(@advert.species_id).title #todo: move into model
+      ' ' + species #todo: move into model
+      
     @advert.city_id = current_person.city_id
 
     respond_to do |format|
@@ -108,6 +100,23 @@ class AdvertsController < ApplicationController
       flash[:success] = 'Advertisement was successfully destroyed.'
       format.html { redirect_to adverts_url }
     end
+  end
+  
+  def get_breed
+    species_id = params[:species_id].to_i
+    @breeds = BreedType.find_all_by_species_id species_id
+    if params[:id]
+      @advert = Advert.find(params[:id])
+    else
+      @advert = Advert.new
+    end
+    
+    if species_id > 0
+      render :partial => 'breed'
+    else
+      render :nothing => true
+    end
+    
   end
   
 end

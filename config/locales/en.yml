@@ -16,3 +16,6 @@ en:
  
   person:
     profile_tab:        "Profile"
+    
+  date:
+    ago:                "ago"

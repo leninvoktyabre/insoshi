@@ -1,3 +1,9 @@
+GIT
+  remote: https://github.com/tacid/russian.git
+  revision: 544a5e931a9044d941ff6f6746b10722f2fdb326
+  specs:
+    russian (0.2.8.pre)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -38,4 +44,6 @@ PLATFORMS
 DEPENDENCIES
   BlueCloth (= 1.0.1)
   chronic (= 0.3.0)
+  i18n (= 0.5.0)
   routing-filter (= 0.2.3)
+  russian!

@@ -1,0 +1,5 @@
+<label for="advert_breed_id">Breeds</label>
+<select name="advert[breed_id]" id="breed_id">
+<%= options_from_collection_for_select(
+  @breeds.find_all{|breed| breed.status == BreedType.status_list['active']}, :id, :title, @advert.breed_id) %>
+</select>

@@ -1,30 +1,32 @@
-<li class="topic">
-  <a name="advert_<%= advert.id %>"></a>
-  <div class="profile-image">
-    <%= image_link advert.person, :image => :thumbnail %>
-  </div>
-  <div class="topic_body">
-    <%- n = advert.comments.count -%>
-    <%= link_to h(advert.title), 
-                advert_path(advert, :comments => n),
-                :class => "show-follow" %>
+<%- if admin? or advert.status == 1 -%>
+	<li class="topic">
+	  <a name="advert_<%= advert.id %>"></a>
+	  <div class="profile-image">
+	    <%= image_link advert.person, :image => :thumbnail %>
+	  </div>
+	  <div class="topic_body">
+	    <%- n = advert.comments.count -%>
+	    <%= link_to h(advert.title), 
+	                advert_path(advert, :comments => n),
+	                :class => "show-follow" %>
 
-		<%- if current_person?(advert.person) or admin? -%>
-      <%= link_to image_tag("icons/page_white_edit.png",
-                            :class => 'actioner'),
-                  edit_advert_path(advert) %>
-      <%= link_to image_tag("icons/page_white_delete.png",
-                            :class => 'actioner'),
-                  advert_path(advert),
-                  :method => :delete,
-                  :confirm => "Delete this advertisement?" %>
-    <%- end -%>
+			<%- if current_person?(advert.person) or admin? -%>
+	      <%= link_to image_tag("icons/page_white_edit.png",
+	                            :class => 'actioner'),
+	                  edit_advert_path(advert) %>
+	      <%= link_to image_tag("icons/page_white_delete.png",
+	                            :class => 'actioner'),
+	                  advert_path(advert),
+	                  :method => :delete,
+	                  :confirm => "Delete this advertisement?" %>
+	    <%- end -%>
 
-    <span class="meta">(<%= pluralize(n, "post") %>)</span>
-    <p class="meta">
-      Started by <%= person_link advert.person %>
-      <%= time_ago_in_words(advert.created_at) %> ago
-    </p>
-  </div>
-  <div class="clear"></div>
-</li>
+	    <span class="meta">(<%= pluralize(n, "post") %>)</span>
+	    <p class="meta">
+	      Started by <%= person_link advert.person %>
+	      <%= time_ago_in_words(advert.created_at) %> ago
+	    </p>
+	  </div>
+	  <div class="clear"></div>
+	</li>
+<% end %>

@@ -14,5 +14,11 @@ class Advert < ActiveRecord::Base
   def comments
     AdvertComment.find(:all, :conditions => ["advert_id = ?", id], :order => "created_at DESC")
   end
+  
+  class << self
+    def status_list
+      {'unconfirmed' => 0, 'active' => 1}
+    end
+  end
 
 end 

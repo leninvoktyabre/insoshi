@@ -13,3 +13,6 @@ ru:
     
   person:
     profile_tab:        "Профайл"
+    
+  date:
+    ago:                "назад"

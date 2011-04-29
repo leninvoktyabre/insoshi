@@ -391,12 +391,17 @@ class Person < ActiveRecord::Base
   
   def guests
     PageView.find(:all,
-                  :conditions => ["request_url = ? AND person_id <> ?", "/people/" + to_param, id],        :group => "person_id", :order => "created_at DESC", :include => :person)
+                  :conditions => ["request_url LIKE ? AND person_id <> ?", "/people/" + to_param + "%", id], 
+                  :group => "person_id", 
+                  :order => "created_at DESC")
   end
   
   def recent_guests
     PageView.find(:all,
-                  :conditions => ["request_url = ? AND person_id <> ?", "/people/" + to_param, id],        :group => "person_id", :order => "created_at DESC", :include => :person, :limit => NUM_RECENT_GUESTS)
+                  :conditions => ["request_url LIKE ? AND person_id <> ?", "/people/" + to_param + "%", id], 
+                  :group => "person_id", 
+                  :order => "created_at DESC", 
+                  :limit => NUM_RECENT_GUESTS)
   end
   
   def city_list

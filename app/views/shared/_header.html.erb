@@ -1,7 +1,6 @@
 <div id="header-wrap">
   <div id="header">
-    <h1><%= link_to image_tag("logo-insoshi.png"), home_url, 
-        :title => "Homepage" %></h1>
+    <h1><%= link_to image_tag("logo-insoshi3.png", :style => "width:64px"), home_url, :title => "Homepage" %></h1>
     <ul id="nav">
       <%- menu.each do |link| -%>
         <%= menu_li link %>
@@ -28,7 +27,7 @@
                      new_password_reminder_path %>
         <%- end -%>             
       <%- end -%>
-      <a href="?locale=ru">Russian</a> 
+      <a href="?locale=ru">Русский</a> 
       <a href="?locale=en">English</a> 
     </p>
   </div>

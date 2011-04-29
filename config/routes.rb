@@ -27,6 +27,9 @@ ActionController::Routing::Routes.draw do |map|
   
   map.connect 'pets/get_breed/:id', :controller => 'pets',
                                    :action => 'get_breed'
+                                   
+  map.connect 'adverts/get_breed/:id', :controller => 'adverts',
+                                  :action => 'get_breed'
   
   map.resources :pets
   map.resources :adverts

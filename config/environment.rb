@@ -81,6 +81,7 @@ Rails::Initializer.run do |config|
   config.gem 'BlueCloth', :lib => 'bluecloth'
   config.gem 'routing-filter'
   config.gem 'i18n'
+  config.gem 'russian'
 end
 
 require 'vendor/plugins/jquery_ui_rails_helpers/helpers/tabs_renderer'
