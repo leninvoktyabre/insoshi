@@ -30,8 +30,10 @@ class Point < ActiveRecord::Base
 
     def remove(object, person_id = false)
       point = Point.find_by_person_id_and_object_and_object_id(person_id ? person_id : object.person_id, object.class.name, object.id)
-      point.status = -1
-      point.save
+      if point != nil
+        point.status = -1
+        point.save
+      end
     end
     
     def get_points(person)

@@ -30,7 +30,7 @@ class ConnectionsController < ApplicationController
       else
         # This should only happen when people do something funky
         # like friending themselves.
-        flash[:notice] = "Invalid connection"
+        flash[:notice] = "Request has been sent"
         format.html { redirect_to(home_url) }
       end
     end
