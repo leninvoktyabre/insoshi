@@ -391,6 +391,7 @@ class Person < ActiveRecord::Base
   
   def guests
     PageView.find(:all,
+                  :select => "person_id, max(created_at) AS created_at",
                   :conditions => ["request_url LIKE ? AND person_id <> ?", "/people/" + to_param + "%", id], 
                   :group => "person_id", 
                   :order => "created_at DESC")
@@ -398,9 +399,10 @@ class Person < ActiveRecord::Base
   
   def recent_guests
     PageView.find(:all,
+                  :select => "person_id, max(created_at) AS created_at",
                   :conditions => ["request_url LIKE ? AND person_id <> ?", "/people/" + to_param + "%", id], 
                   :group => "person_id", 
-                  :order => "created_at DESC", 
+                  :order => "created_at DESC",
                   :limit => NUM_RECENT_GUESTS)
   end
   

@@ -8,7 +8,7 @@ class SearchesController < ApplicationController
     redirect_to(home_url) and return if params[:q].nil?
     
     #query = params[:q].strip.inspect
-    query = params[:q].strip
+    query = params[:q].strip.downcase
     model = strip_admin(params[:model])
     page  = params[:page] || 1
 
@@ -37,15 +37,15 @@ class SearchesController < ApplicationController
       # @results = @search.results
       
       if model == 'Pet'  
-        @results = Pet.find(:all, :conditions => ['status = 1 AND (name LIKE ? OR description LIKE ?)', '%'+query+'%', '%'+query+'%'])
+        @results = Pet.find(:all, :conditions => ['status = 1 AND (LOWER(name) LIKE ? OR LOWER(description) LIKE ?)', '%'+query+'%', '%'+query+'%'])
       elsif model == 'Advert'
-        @results = Advert.find(:all, :conditions => ['status = 1 AND (title LIKE ? OR description LIKE ?)', '%'+query+'%', '%'+query+'%'])
+        @results = Advert.find(:all, :conditions => ['status = 1 AND (LOWER(title) LIKE ? OR LOWER(description) LIKE ?)', '%'+query+'%', '%'+query+'%'])
       elsif model == 'Catalog'
-        @results = Link.find(:all, :conditions => ['status = 1 AND (title LIKE ? OR description LIKE ?)', '%'+query+'%', '%'+query+'%'])
+        @results = Link.find(:all, :conditions => ['status = 1 AND (LOWER(title) LIKE ? OR LOWER(description) LIKE ?)', '%'+query+'%', '%'+query+'%'])
       elsif model == 'Person' or model == 'AllPerson'
-        @results = model.classify.constantize.find(:all, :conditions => ['name LIKE ? OR description LIKE ?', '%'+query+'%', '%'+query+'%'])
+        @results = model.classify.constantize.find(:all, :conditions => ['LOWER(name) LIKE ? OR LOWER(description) LIKE ?', '%'+query+'%', '%'+query+'%'])
       elsif model == 'ForumPost'
-        @results = Post.find(:all, :conditions => ['type = ? AND (title LIKE ? OR body LIKE ?)', 'ForumPost', '%'+query+'%', '%'+query+'%'])
+        @results = Post.find(:all, :conditions => ['type = ? AND (LOWER(title) LIKE ? OR LOWER(body) LIKE ?)', 'ForumPost', '%'+query+'%', '%'+query+'%'])
       end
       
       @results = @results.paginate(:page => params[:page],
